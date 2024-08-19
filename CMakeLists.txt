@@ -10,8 +10,8 @@ project(kritis3m_wolfssl)
 option(BUILD_SHARED_LIBS "Build shared libraries (.so) instead of static ones (.a)" ON)
 
 # When this option is enabled, both WolfSSL and liboqs will be built as standalone
-# shared librarys to be installed system-wide. When disabled, the libraries will be
-# built as static libraries to be linked against a wrapping application.
+# librarys to be installed system-wide. When disabled, the libraries will be
+# built as libraries only to be linked against a wrapping application.
 option(KRITIS3M_WOLFSSL_STANDALONE "Use standalone WolfSSL" ON)
 
 # This option enables the necessary features for PKI support
@@ -102,9 +102,12 @@ target_include_directories(wolfssl PUBLIC $<BUILD_INTERFACE:${OQS_BINARY_DIR}/..
 # Link liboqs to WolfSSL
 target_link_libraries(wolfssl PRIVATE oqs)
 
-
 # Enable PKI support if requested
 if(KRITIS3M_WOLFSSL_PKI_SUPPORT)
         target_compile_definitions(wolfssl PRIVATE KRITIS3M_WOLFSSL_PKI_SUPPORT)
 endif()
 
+# Install our user_settings.h file
+if (KRITIS3M_WOLFSSL_STANDALONE)
+        install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/user_settings.h DESTINATION include)
+endif()
