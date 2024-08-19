@@ -15,7 +15,7 @@ option(BUILD_SHARED_LIBS "Build shared libraries (.so) instead of static ones (.
 option(KRITIS3M_WOLFSSL_STANDALONE "Use standalone WolfSSL" ON)
 
 # This option enables the necessary features for PKI support
-option(KRITIS3M_WOLFSSL_PKI_SUPPORT "Enable PKI support in WolfSSL" OFF)
+option(KRITIS3M_WOLFSSL_PKI_SUPPORT "Enable PKI support in WolfSSL" ON)
 
 
 # External repositories we need
