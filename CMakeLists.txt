@@ -14,9 +14,6 @@ option(BUILD_SHARED_LIBS "Build shared libraries (.so) instead of static ones (.
 # built as libraries only to be linked against a wrapping application.
 option(KRITIS3M_WOLFSSL_STANDALONE "Use standalone WolfSSL" ON)
 
-# This option enables the necessary features for PKI support
-option(KRITIS3M_WOLFSSL_PKI_SUPPORT "Enable PKI support in WolfSSL" ON)
-
 
 # External repositories we need
 include(FetchContent)
@@ -101,11 +98,6 @@ target_include_directories(wolfssl PUBLIC $<BUILD_INTERFACE:${OQS_BINARY_DIR}/..
 
 # Link liboqs to WolfSSL
 target_link_libraries(wolfssl PRIVATE oqs)
-
-# Enable PKI support if requested
-if(KRITIS3M_WOLFSSL_PKI_SUPPORT)
-        target_compile_definitions(wolfssl PRIVATE KRITIS3M_WOLFSSL_PKI_SUPPORT)
-endif()
 
 # Install our user_settings.h file
 if (KRITIS3M_WOLFSSL_STANDALONE)

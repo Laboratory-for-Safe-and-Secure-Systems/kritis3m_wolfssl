@@ -22,6 +22,12 @@ extern "C" {
 #define WOLFSSL_ALT_NAMES
 #define WC_CTC_MAX_ALT_SIZE 512
 
+#define WOLFSSL_KEY_GEN
+#define WOLFSSL_CERT_GEN
+#define WOLFSSL_CERT_REQ
+#define WOLFSSL_CERT_EXT
+#define WC_ENABLE_ASYM_KEY_EXPORT
+
 #define NO_PWDBASED
 #define NO_WRITEV
 #define NO_DEV_URANDOM
@@ -32,16 +38,6 @@ extern "C" {
 #define WOLFSSL_NO_SOCK
 #define NO_PKCS11_ECDH
 #define NO_PKCS11_EC_KEYGEN
-
-#if defined(KRITIS3M_WOLFSSL_PKI_SUPPORT)
-
-#define WOLFSSL_KEY_GEN
-#define WOLFSSL_CERT_GEN
-#define WOLFSSL_CERT_REQ
-#define WOLFSSL_CERT_EXT
-#define WC_ENABLE_ASYM_KEY_EXPORT
-
-#endif
 
 
 /* Enable experimental features */
