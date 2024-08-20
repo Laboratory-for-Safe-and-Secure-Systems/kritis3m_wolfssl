@@ -17,7 +17,7 @@ option(KRITIS3M_WOLFSSL_STANDALONE "Use standalone WolfSSL" ON)
 
 # External repositories we need
 include(FetchContent)
-Set(FETCHCONTENT_QUIET FALSE)
+set(FETCHCONTENT_QUIET FALSE)
 FetchContent_Declare(liboqs
         GIT_REPOSITORY          https://github.com/open-quantum-safe/liboqs.git
         GIT_TAG                 origin/main
@@ -69,7 +69,6 @@ endif()
 FetchContent_GetProperties(liboqs)
 if(NOT liboqs_POPULATED)
         FetchContent_Populate(liboqs)
-
         if(KRITIS3M_WOLFSSL_STANDALONE)
                 add_subdirectory(${liboqs_SOURCE_DIR} ${liboqs_BINARY_DIR})
         else()
@@ -80,7 +79,6 @@ endif()
 FetchContent_GetProperties(wolfssl)
 if(NOT wolfssl_POPULATED)
         FetchContent_Populate(wolfssl)
-
         if(KRITIS3M_WOLFSSL_STANDALONE)
                 add_subdirectory(${wolfssl_SOURCE_DIR} ${wolfssl_BINARY_DIR})
         else()
