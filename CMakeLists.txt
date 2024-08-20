@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.22)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(kritis3m_wolfssl)
+
+include(GNUInstallDirs)
+include(FetchContent)
+set(FETCHCONTENT_QUIET FALSE)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
 # Options
@@ -16,8 +20,6 @@ option(KRITIS3M_WOLFSSL_STANDALONE "Use standalone WolfSSL" ON)
 
 
 # External repositories we need
-include(FetchContent)
-set(FETCHCONTENT_QUIET FALSE)
 FetchContent_Declare(liboqs
         GIT_REPOSITORY          https://github.com/open-quantum-safe/liboqs.git
         GIT_TAG                 origin/main
@@ -99,5 +101,5 @@ target_link_libraries(wolfssl PRIVATE oqs)
 
 # Install our user_settings.h file
 if (KRITIS3M_WOLFSSL_STANDALONE)
-        install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/user_settings.h DESTINATION include)
+        install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/user_settings.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 endif()
