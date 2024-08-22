@@ -54,6 +54,7 @@ extern "C" {
 #define HAVE_CURVE448
 #define WC_RSA_PSS
 #define WC_RSA_BLINDING
+#define WOLFSSL_RSA_KEY_CHECK
 #define WOLFSSL_SHA384
 #define WOLFSSL_SHA512
 #define WOLFSSL_SHA3
