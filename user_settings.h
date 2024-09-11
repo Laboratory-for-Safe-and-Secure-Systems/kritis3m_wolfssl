@@ -37,7 +37,7 @@ extern "C" {
 #define WOLFSSL_NO_TLS12
 #define NO_OLD_RNGNAME
 #define WOLFSSL_NO_SOCK
-#define NO_PKCS11_ECDH
+// #define NO_PKCS11_ECDH
 // #define NO_PKCS11_EC_KEYGEN
 
 
@@ -58,6 +58,8 @@ extern "C" {
 #define HAVE_ED448_KEY_EXPORT
 #define WC_RSA_PSS
 #define WC_RSA_BLINDING
+#define WC_RSA_DIRECT
+#define WOLF_CRYPTO_CB_RSA_PAD
 #define WOLFSSL_RSA_KEY_CHECK
 #define WOLFSSL_SHA384
 #define WOLFSSL_SHA512
