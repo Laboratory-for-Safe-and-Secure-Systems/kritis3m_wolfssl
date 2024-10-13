@@ -8,7 +8,9 @@ set(FETCHCONTENT_QUIET FALSE)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Necessary to allow FetchContent_Populate
-cmake_policy(SET CMP0169 OLD)
+if(POLICY CMP0169)
+        cmake_policy(SET CMP0169 OLD)
+endif()
 
 
 # Options
@@ -75,7 +77,7 @@ set(WOLFSSL_OQS OFF)
 set(WOLFSSL_BUILD_OUT_OF_TREE ON)
 if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "x86_64" AND NOT MSVC)
         message(STATUS "Enabling Intel ASM optimizations for WolfSSL")
-        set(WOLFSSL_INTEL_ASM ON)
+        # set(WOLFSSL_INTEL_ASM ON)
 # elseif("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "aarch64|arm64")
 #         message(STATUS "Enabling ARM ASM optimizations for WolfSSL")
 #         set(WOLFSSL_ARM_ASM ON)
