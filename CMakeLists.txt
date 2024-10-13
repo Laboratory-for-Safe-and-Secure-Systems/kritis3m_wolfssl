@@ -7,6 +7,9 @@ include(FetchContent)
 set(FETCHCONTENT_QUIET FALSE)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Necessary to allow FetchContent_Populate
+cmake_policy(SET CMP0169 OLD)
+
 
 # Options
 
@@ -34,6 +37,17 @@ FetchContent_Declare(wolfssl
 )
 
 
+if(MSVC)
+        set(CMAKE_MSVC_RUNTIME_LIBRARY "")
+        # if(BUILD_SHARED_LIBS)
+        #         set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+        # else()
+        #         set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+        # endif()
+        set(WARNING_C_FLAGS "")
+endif()
+
+
 # Liboqs configuration
 set(OQS_DIST_BUILD  OFF)
 set(OQS_BUILD_ONLY_LIB ON)
@@ -59,7 +73,7 @@ set(WOLFSSL_EXAMPLES OFF)
 set(WOLFSSL_CRYPT_TESTS OFF)
 set(WOLFSSL_OQS OFF)
 set(WOLFSSL_BUILD_OUT_OF_TREE ON)
-if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "x86_64")
+if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "x86_64" AND NOT MSVC)
         message(STATUS "Enabling Intel ASM optimizations for WolfSSL")
         set(WOLFSSL_INTEL_ASM ON)
 # elseif("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "aarch64|arm64")

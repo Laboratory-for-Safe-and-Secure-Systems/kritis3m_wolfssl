@@ -8,14 +8,14 @@ extern "C" {
 
 /* Feature support */
 #define WOLFSSL_TLS13
-#define WOLFSSL_USER_IO
+// #define WOLFSSL_USER_IO
 #define WOLF_CRYPTO_CB
 #define HAVE_TLS_EXTENSIONS
 #define HAVE_SUPPORTED_CURVES
 #define HAVE_NULL_CIPHER
 #define HAVE_SECRET_CALLBACK
 #define HAVE_WOLF_BIGINT
-#define HAVE_PKCS11
+// #define HAVE_PKCS11
 #define WOLFSSL_DUAL_ALG_CERTS
 #define WOLFSSL_ASN_TEMPLATE
 #define LARGE_STATIC_BUFFERS
@@ -36,7 +36,7 @@ extern "C" {
 #define NO_OLD_TLS
 #define WOLFSSL_NO_TLS12
 #define NO_OLD_RNGNAME
-#define WOLFSSL_NO_SOCK
+// #define WOLFSSL_NO_SOCK
 // #define NO_PKCS11_ECDH
 // #define NO_PKCS11_EC_KEYGEN
 
@@ -107,13 +107,13 @@ extern "C" {
 #define WOLFSSL_SP_4096
 #define WOLFSSL_SP_384
 #define WOLFSSL_SP_521
-#define WOLFSSL_SP_ASM
+// #define WOLFSSL_SP_ASM
 
 #if defined(__x86_64__)
 
 #define WOLFSSL_SP_X86_64
-#define WOLFSSL_SP_X86_64_ASM
-#define USE_INTEL_SPEEDUP
+// #define WOLFSSL_SP_X86_64_ASM
+// #define USE_INTEL_SPEEDUP
 
 #elif defined(__aarch64__)
 
