@@ -15,7 +15,8 @@ extern "C" {
 #define HAVE_NULL_CIPHER
 #define HAVE_SECRET_CALLBACK
 #define HAVE_WOLF_BIGINT
-// #define HAVE_PKCS11
+#define HAVE_PKCS11
+// #define HAVE_PKCS11_STATIC
 #define WOLFSSL_DUAL_ALG_CERTS
 #define WOLFSSL_ASN_TEMPLATE
 #define LARGE_STATIC_BUFFERS
@@ -36,7 +37,6 @@ extern "C" {
 #define NO_OLD_TLS
 #define WOLFSSL_NO_TLS12
 #define NO_OLD_RNGNAME
-// #define WOLFSSL_NO_SOCK
 // #define NO_PKCS11_ECDH
 // #define NO_PKCS11_EC_KEYGEN
 
