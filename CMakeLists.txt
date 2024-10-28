@@ -23,6 +23,10 @@ option(BUILD_SHARED_LIBS "Build shared libraries (.so) instead of static ones (.
 # built as libraries only to be linked against a wrapping application.
 option(KRITIS3M_WOLFSSL_STANDALONE "Use standalone WolfSSL" ON)
 
+# When this option is enabled, the WolfSSL library will be built with assembly optimizations
+# enabled. This is only available for x86 on Linux and some ARM CPUs.
+option(KRITIS3M_WOLFSSL_ASM "Enable assembly optimizations for WolfSSL" ON)
+
 
 # External repositories we need
 FetchContent_Declare(liboqs
@@ -76,12 +80,13 @@ set(WOLFSSL_CRYPT_TESTS OFF)
 set(WOLFSSL_OQS OFF)
 set(WOLFSSL_BUILD_OUT_OF_TREE ON)
 set(WOLFSSL_X86_64_BUILD_ASM OFF)
-if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "x86_64" AND NOT MSVC)
+if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "x86_64" AND KRITIS3M_WOLFSSL_ASM)
         message(STATUS "Enabling Intel ASM optimizations for WolfSSL")
-        # set(WOLFSSL_INTEL_ASM ON)
-# elseif("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "aarch64|arm64")
-#         message(STATUS "Enabling ARM ASM optimizations for WolfSSL")
-#         set(WOLFSSL_ARM_ASM ON)
+        set(WOLFSSL_INTEL_ASM ON)
+        set(WOLFSSL_X86_64_BUILD_ASM ON)
+elseif("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "aarch64|arm64" AND KRITIS3M_WOLFSSL_ASM)
+        message(STATUS "Enabling ARM ASM optimizations for WolfSSL")
+        set(WOLFSSL_ARM_ASM ON)
 endif()
 
 
@@ -106,9 +111,12 @@ if(NOT wolfssl_POPULATED)
         endif()
 endif()
 
+# Write the configuration into the user_settings.h file
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/user_settings.h.in user_settings.h)
+
 # In order for WolfSSL to find the 'user_settings.h' file, we have to
 # provide the directory where it is located.
-target_include_directories(wolfssl PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
+target_include_directories(wolfssl PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
 
 # Provide the liboqs headers (generated during build) for WolfSSL
 get_target_property(OQS_BINARY_DIR oqs BINARY_DIR)
@@ -117,7 +125,17 @@ target_include_directories(wolfssl PUBLIC $<BUILD_INTERFACE:${OQS_BINARY_DIR}/..
 # Link liboqs to WolfSSL
 target_link_libraries(wolfssl PRIVATE oqs)
 
+# Set additional compiler flags for WolfSSL
+target_compile_options(wolfssl PRIVATE
+        -march=native
+        -mtune=native
+)
+if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "aarch64|arm64")
+        target_compile_options(wolfssl PRIVATE -mstrict-align)
+endif()
+
+
 # Install our user_settings.h file
 if (KRITIS3M_WOLFSSL_STANDALONE)
-        install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/user_settings.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/user_settings.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 endif()
