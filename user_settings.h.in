@@ -115,6 +115,8 @@ extern "C" {
 #define WOLFSSL_SP_ASM
 #define WOLFSSL_SP_X86_64
 #define WOLFSSL_SP_X86_64_ASM
+#define WOLFSSL_AESNI
+#define WOLFSSL_X86_64_BUILD
 #define USE_INTEL_SPEEDUP
 
 #elif defined(__aarch64__) && defined(KRITIS3M_WOLFSSL_ASM)
