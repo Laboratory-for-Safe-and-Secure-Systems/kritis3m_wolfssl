@@ -125,6 +125,8 @@ extern "C" {
 #define WOLFSSL_ARMASM
 #define WOLFSSL_SP_ARM64
 #define WOLFSSL_SP_ARM64_ASM
+// #define WOLFSSL_ARMASM_NO_HW_CRYPTO
+// #define WOLFSSL_AARCH64_NO_SQRMLSH
 
 #endif
 
