@@ -30,6 +30,10 @@ option(KRITIS3M_WOLFSSL_STANDALONE "Use standalone WolfSSL" ON)
 option(KRITIS3M_WOLFSSL_ASM "Enable assembly optimizations for WolfSSL" ON)
 
 
+# Make sure all libraries are installed in the lib directory (not lib64)
+set(CMAKE_INSTALL_LIBDIR "lib")
+
+
 # External repositories we need
 FetchContent_Declare(liboqs
         GIT_REPOSITORY          https://github.com/open-quantum-safe/liboqs.git
