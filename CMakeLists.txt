@@ -29,25 +29,30 @@ option(KRITIS3M_WOLFSSL_STANDALONE "Use standalone WolfSSL" ON)
 # enabled. This is only available for x86 on Linux and some ARM CPUs.
 option(KRITIS3M_WOLFSSL_ASM "Enable assembly optimizations for WolfSSL" ON)
 
+# When this option is enabled, support for the PQC signature algorithm FALCON (FN-DSA) is
+# enabled via the additional library liboqs. When disabled, the library will not be built.
+option(KRITIS3M_WOLFSSL_ENABLE_FALCON "Enable FALCON (FN-DSA) signature algorithm" ON)
+
 
 # Make sure all libraries are installed in the lib directory (not lib64)
 set(CMAKE_INSTALL_LIBDIR "lib")
 
 
 # External repositories we need
-FetchContent_Declare(liboqs
-        GIT_REPOSITORY          https://github.com/open-quantum-safe/liboqs.git
-        GIT_TAG                 origin/main
-        GIT_PROGRESS            TRUE
-        USES_TERMINAL_DOWNLOAD  TRUE
-)
 FetchContent_Declare(wolfssl
         GIT_REPOSITORY          git@github.com:Laboratory-for-Safe-and-Secure-Systems/wolfssl.git
         GIT_TAG                 origin/development
         GIT_PROGRESS            TRUE
         USES_TERMINAL_DOWNLOAD  TRUE
 )
-
+if(KRITIS3M_WOLFSSL_ENABLE_FALCON)
+        FetchContent_Declare(liboqs
+                GIT_REPOSITORY          https://github.com/open-quantum-safe/liboqs.git
+                GIT_TAG                 origin/main
+                GIT_PROGRESS            TRUE
+                USES_TERMINAL_DOWNLOAD  TRUE
+        )
+endif()
 
 if(MSVC)
         set(CMAKE_MSVC_RUNTIME_LIBRARY "")
@@ -60,24 +65,37 @@ if(MSVC)
 endif()
 
 
-# Liboqs configuration
-set(OQS_DIST_BUILD  OFF)
-set(OQS_BUILD_ONLY_LIB ON)
-set(OQS_USE_OPENSSL OFF)
-set(OQS_ENABLE_KEM_BIKE OFF)
-set(OQS_ENABLE_KEM_FRODOKEM OFF)
-set(OQS_ENABLE_KEM_NTRUPRIME OFF)
-set(OQS_ENABLE_KEM_CLASSIC_MCELIECE OFF)
-set(OQS_ENABLE_KEM_HQC OFF)
-set(OQS_ENABLE_KEM_KYBER OFF)
-set(OQS_ENABLE_KEM_ML_KEM OFF)
-set(OQS_ENABLE_SIG_SPHINCS OFF)
-set(OQS_ENABLE_SIG_DILITHIUM OFF)
-set(OQS_ENABLE_SIG_MAYO OFF)
-set(OQS_ENABLE_SIG_CROSS OFF)
-set(OQS_ENABLE_SIG_ML_DSA OFF)
-set(OQS_ENABLE_SIG_STFL_XMSS OFF)
-set(OQS_ENABLE_SIG_STFL_LMS OFF)
+if(KRITIS3M_WOLFSSL_ENABLE_FALCON)
+        # Liboqs configuration
+        set(OQS_DIST_BUILD  OFF)
+        set(OQS_BUILD_ONLY_LIB ON)
+        set(OQS_USE_OPENSSL OFF)
+        set(OQS_ENABLE_KEM_BIKE OFF)
+        set(OQS_ENABLE_KEM_FRODOKEM OFF)
+        set(OQS_ENABLE_KEM_NTRUPRIME OFF)
+        set(OQS_ENABLE_KEM_CLASSIC_MCELIECE OFF)
+        set(OQS_ENABLE_KEM_HQC OFF)
+        set(OQS_ENABLE_KEM_KYBER OFF)
+        set(OQS_ENABLE_KEM_ML_KEM OFF)
+        set(OQS_ENABLE_SIG_SPHINCS OFF)
+        set(OQS_ENABLE_SIG_DILITHIUM OFF)
+        set(OQS_ENABLE_SIG_MAYO OFF)
+        set(OQS_ENABLE_SIG_CROSS OFF)
+        set(OQS_ENABLE_SIG_ML_DSA OFF)
+        set(OQS_ENABLE_SIG_STFL_XMSS OFF)
+        set(OQS_ENABLE_SIG_STFL_LMS OFF)
+
+        # Actually add the external repositories to our project
+        FetchContent_GetProperties(liboqs)
+        if(NOT liboqs_POPULATED)
+                FetchContent_Populate(liboqs)
+                if(KRITIS3M_WOLFSSL_STANDALONE)
+                        add_subdirectory(${liboqs_SOURCE_DIR} ${liboqs_BINARY_DIR})
+                else()
+                        add_subdirectory(${liboqs_SOURCE_DIR} ${liboqs_BINARY_DIR} EXCLUDE_FROM_ALL)
+                endif()
+        endif()
+endif()
 
 # WolfSSL configuration
 set(WOLFSSL_USER_SETTINGS ON)
@@ -97,17 +115,6 @@ elseif("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "aarch64|arm64" AND KRITIS3M_WOLFSSL_
 endif()
 
 
-# Actually add the external repositories to our project
-FetchContent_GetProperties(liboqs)
-if(NOT liboqs_POPULATED)
-        FetchContent_Populate(liboqs)
-        if(KRITIS3M_WOLFSSL_STANDALONE)
-                add_subdirectory(${liboqs_SOURCE_DIR} ${liboqs_BINARY_DIR})
-        else()
-                add_subdirectory(${liboqs_SOURCE_DIR} ${liboqs_BINARY_DIR} EXCLUDE_FROM_ALL)
-        endif()
-endif()
-
 FetchContent_GetProperties(wolfssl)
 if(NOT wolfssl_POPULATED)
         FetchContent_Populate(wolfssl)
@@ -125,12 +132,15 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/user_settings.h.in user_settings.h)
 # provide the directory where it is located.
 target_include_directories(wolfssl PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
 
-# Provide the liboqs headers (generated during build) for WolfSSL
-get_target_property(OQS_BINARY_DIR oqs BINARY_DIR)
-target_include_directories(wolfssl PUBLIC $<BUILD_INTERFACE:${OQS_BINARY_DIR}/../include>)
 
-# Link liboqs to WolfSSL
-target_link_libraries(wolfssl PRIVATE oqs)
+if(KRITIS3M_WOLFSSL_ENABLE_FALCON)
+        # Provide the liboqs headers (generated during build) for WolfSSL
+        get_target_property(OQS_BINARY_DIR oqs BINARY_DIR)
+        target_include_directories(wolfssl PUBLIC $<BUILD_INTERFACE:${OQS_BINARY_DIR}/../include>)
+
+        # Link liboqs to WolfSSL
+        target_link_libraries(wolfssl PRIVATE oqs)
+endif()
 
 # Set additional compiler flags for WolfSSL
 target_compile_options(wolfssl PRIVATE
