@@ -17,6 +17,7 @@ extern "C" {
 #define HAVE_WOLF_BIGINT
 #define HAVE_PKCS11
 // #define HAVE_PKCS11_STATIC
+// #define HAVE_PKCS11_STATIC_V3
 #define WOLFSSL_DUAL_ALG_CERTS
 #define WOLFSSL_ASN_TEMPLATE
 #define LARGE_STATIC_BUFFERS
@@ -78,6 +79,12 @@ extern "C" {
 #define WOLFSSL_DILITHIUM_FIPS204_DRAFT
 
 
+// #define WOLFSSL_HAVE_LMS
+// #define WOLFSSL_WC_LMS
+// #define WOLFSSL_LMS_VERIFY_ONLY
+
+// #define WOLFSSL_HAVE_XMSS
+// #define WOLFSSL_WC_XMSS
 
 #define WC_DILITHIUM_CACHE_MATRIX_A
 #define WC_DILITHIUM_CACHE_PRIV_VECTORS
@@ -107,6 +114,8 @@ extern "C" {
 #define DEBUG_WOLFSSL
 #define WOLFSSL_MAX_ERROR_SZ 224
 // #define WOLFSSL_DEBUG_PKCS11
+// #define WOLFSSL_DEBUG_MEMORY
+// #define WOLFSSL_DEBUG_MEMORY_PRINT
 
 
 /* Math configuration */
