@@ -47,6 +47,7 @@ extern "C" {
 
 
 /* Algorithm support and configuration */
+#define WC_RNG_BLOCKING
 #define HAVE_ECC
 #define HAVE_ECC384
 #define HAVE_ECC521
