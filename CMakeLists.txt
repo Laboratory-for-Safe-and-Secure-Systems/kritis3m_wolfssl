@@ -29,6 +29,10 @@ option(KRITIS3M_WOLFSSL_STANDALONE "Use standalone WolfSSL" ON)
 # enabled. This is only available for x86 on Linux and some ARM CPUs.
 option(KRITIS3M_WOLFSSL_ASM "Enable assembly optimizations for WolfSSL" ON)
 
+# When this option is enabled, the WolfSSL library will be built using ARM cryptographic
+# instructions. This only works if the given CPU supports these.
+option(KRITIS3M_WOLFSSL_AARCH64_CRYPTO_EXT "Use ARM Aarch64 cryptographic extensions" ON)
+
 # When this option is enabled, support for the PQC signature algorithm FALCON (FN-DSA) is
 # enabled via the additional library liboqs. When disabled, the library will not be built.
 option(KRITIS3M_WOLFSSL_ENABLE_FALCON "Enable FALCON (FN-DSA) signature algorithm" ON)

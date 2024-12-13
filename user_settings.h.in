@@ -130,8 +130,9 @@ extern "C" {
 #define WOLFSSL_SP_521
 
 #cmakedefine KRITIS3M_WOLFSSL_ASM
+#cmakedefine KRITIS3M_WOLFSSL_AARCH64_CRYPTO_EXT
 
-#if defined(__x86_64__) && defined(KRITIS3M_WOLFSSL_ASM)
+#if defined(KRITIS3M_WOLFSSL_ASM) && defined(__x86_64__)
 
 #define WOLFSSL_SP_ASM
 #define WOLFSSL_SP_X86_64
@@ -140,16 +141,21 @@ extern "C" {
 #define WOLFSSL_X86_64_BUILD
 #define USE_INTEL_SPEEDUP
 
-#elif defined(__aarch64__) && defined(KRITIS3M_WOLFSSL_ASM)
+#elif defined(KRITIS3M_WOLFSSL_ASM) && defined(__aarch64__)
 
 #define WOLFSSL_SP_ASM
 #define WOLFSSL_ARMASM
 #define WOLFSSL_SP_ARM64
 #define WOLFSSL_SP_ARM64_ASM
-// #define WOLFSSL_ARMASM_NO_HW_CRYPTO
-// #define WOLFSSL_AARCH64_NO_SQRMLSH
+
+#if !defined(KRITIS3M_WOLFSSL_AARCH64_CRYPTO_EXT)
+
+#define WOLFSSL_ARMASM_NO_HW_CRYPTO
+#define WOLFSSL_AARCH64_NO_SQRMLSH
 
 #endif
+
+#endif /* KRITIS3M_WOLFSSL_ASM */
 
 #ifdef __cplusplus
 }
