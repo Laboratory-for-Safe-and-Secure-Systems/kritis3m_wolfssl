@@ -30,6 +30,7 @@ extern "C" {
 #define WOLFSSL_CERT_REQ
 #define WOLFSSL_CERT_EXT
 #define WC_ENABLE_ASYM_KEY_EXPORT
+#define KEEP_PEER_CERT
 
 #define NO_PWDBASED
 #define NO_WRITEV
