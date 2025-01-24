@@ -32,6 +32,8 @@ extern "C" {
 #define WC_ENABLE_ASYM_KEY_EXPORT
 #define KEEP_PEER_CERT
 
+#define MAX_PSK_ID_LEN 127 /* One byte is added internally */
+
 #define NO_PWDBASED
 #define NO_WRITEV
 #define NO_DEV_URANDOM
@@ -39,6 +41,10 @@ extern "C" {
 #define NO_OLD_TLS
 #define WOLFSSL_NO_TLS12
 #define NO_OLD_RNGNAME
+#define NO_HANDSHAKE_DONE_CB
+#define NO_SESSION_CACHE
+#define NO_CLIENT_CACHE
+#define WOLFSSL_NO_ASYNC_IO
 // #define NO_PKCS11_ECDH
 // #define NO_PKCS11_EC_KEYGEN
 
