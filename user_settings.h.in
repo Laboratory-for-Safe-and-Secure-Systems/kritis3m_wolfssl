@@ -54,6 +54,8 @@ extern "C" {
 /* Enable experimental features */
 #define WOLFSSL_EXPERIMENTAL_SETTINGS
 
+/* Enable Certificates in addtition to the PSKs */
+#define WOLFSSL_CERT_WITH_EXTERN_PSK
 
 /* Algorithm support and configuration */
 #define WC_RNG_BLOCKING
