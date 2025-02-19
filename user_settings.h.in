@@ -81,6 +81,9 @@ extern "C" {
 #define WOLFSSL_SHAKE256
 #define HAVE_HKDF
 #define HAVE_AESGCM
+#define HAVE_CHACHA
+#define HAVE_POLY1305
+#define HAVE_ONE_TIME_AUTH
 #define GCM_TABLE_4BIT
 #define WOLFSSL_HAVE_KYBER
 #define WOLFSSL_WC_KYBER
