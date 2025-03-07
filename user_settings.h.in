@@ -33,7 +33,6 @@ extern "C" {
 #define WC_ENABLE_ASYM_KEY_EXPORT
 #define KEEP_PEER_CERT
 
-#define WOLFSSL_PSK_ONE_ID
 #define NO_TLSX_PSKKEM_PLAIN_ANNOUNCE
 #define MAX_PSK_ID_LEN 127 /* One byte is added internally */
 #define WOLFSSL_CERT_WITH_EXTERN_PSK
