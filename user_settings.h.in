@@ -5,7 +5,6 @@
 extern "C" {
 #endif
 
-
 /* Feature support */
 #define WOLFSSL_TLS13
 // #define WOLFSSL_USER_IO
@@ -54,10 +53,8 @@ extern "C" {
 // #define NO_PKCS11_ECDH
 // #define NO_PKCS11_EC_KEYGEN
 
-
 /* Enable experimental features */
 #define WOLFSSL_EXPERIMENTAL_SETTINGS
-
 
 /* Algorithm support and configuration */
 #define WC_RNG_BLOCKING
@@ -88,14 +85,11 @@ extern "C" {
 #define HAVE_POLY1305
 #define HAVE_ONE_TIME_AUTH
 #define GCM_TABLE_4BIT
-#define WOLFSSL_HAVE_KYBER
-#define WOLFSSL_WC_KYBER
-// #define WOLFSSL_KYBER_ORIGINAL
+#define WOLFSSL_HAVE_MLKEM
+#define WOLFSSL_WC_MLKEM
 #define WOLFSSL_MLKEM_CACHE_A
 #define HAVE_DILITHIUM
 #define WOLFSSL_WC_DILITHIUM
-// #define WOLFSSL_DILITHIUM_FIPS204_DRAFT
-
 
 // #define WOLFSSL_HAVE_LMS
 // #define WOLFSSL_WC_LMS
@@ -117,7 +111,6 @@ extern "C" {
 
 #endif
 
-
 #define NO_MD4
 #define NO_MD5
 #define NO_DES3
@@ -127,14 +120,12 @@ extern "C" {
 #define NO_AES_192
 #define WOLFSSL_NO_SPHINCS
 
-
 /* Debugging */
 #define DEBUG_WOLFSSL
 #define WOLFSSL_MAX_ERROR_SZ 224
 // #define WOLFSSL_DEBUG_PKCS11
 // #define WOLFSSL_DEBUG_MEMORY
 // #define WOLFSSL_DEBUG_MEMORY_PRINT
-
 
 /* Math configuration */
 #define WOLFSSL_SP_MATH
