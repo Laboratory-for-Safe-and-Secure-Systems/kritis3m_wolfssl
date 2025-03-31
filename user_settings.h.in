@@ -63,6 +63,7 @@ extern "C" {
 #define HAVE_ECC521
 #define ECC_SHAMIR
 #define ECC_TIMING_RESISTANT
+#define WOLFSSL_PUBLIC_MP
 #define HAVE_CURVE25519
 #define HAVE_ED25519
 #define HAVE_ED25519_KEY_EXPORT
