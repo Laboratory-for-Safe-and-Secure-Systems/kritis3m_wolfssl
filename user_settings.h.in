@@ -128,6 +128,16 @@ extern "C" {
 // #define WOLFSSL_DEBUG_MEMORY
 // #define WOLFSSL_DEBUG_MEMORY_PRINT
 
+#cmakedefine KRITIS3M_WOLFSSL_HEAP_TRACKING
+
+#if defined(KRITIS3M_WOLFSSL_HEAP_TRACKING)
+
+#define USE_WOLFSSL_MEMORY
+#define WOLFSSL_TRACK_MEMORY
+#define WOLFSSL_TRACK_MEMORY_VERBOSE
+
+#endif
+
 /* Math configuration */
 #define WOLFSSL_SP_MATH
 #define WOLFSSL_SP_MATH_ALL
