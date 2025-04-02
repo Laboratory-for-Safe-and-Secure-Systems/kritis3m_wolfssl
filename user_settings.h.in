@@ -2,9 +2,9 @@
 #define _USER_SETTINGS_H_
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
-
 
 /* Feature support */
 #define WOLFSSL_TLS13
@@ -52,16 +52,20 @@ extern "C" {
 // #define NO_PKCS11_ECDH
 // #define NO_PKCS11_EC_KEYGEN
 
-
 /* Enable experimental features */
 #define WOLFSSL_EXPERIMENTAL_SETTINGS
-
 
 /* Algorithm support and configuration */
 #define WC_RNG_BLOCKING
 #define HAVE_ECC
 #define HAVE_ECC384
 #define HAVE_ECC521
+// pkcs 7 support
+#define HAVE_PKCS7
+#define HAVE_X963_KDF
+#define HAVE_AES_KEYWRAP
+#define WOLFSSL_AES_DIRECT
+// end pkcs 7 support
 #define ECC_SHAMIR
 #define ECC_TIMING_RESISTANT
 #define HAVE_CURVE25519
@@ -92,15 +96,14 @@ extern "C" {
 #define WOLFSSL_MLKEM_CACHE_A
 #define HAVE_DILITHIUM
 #define WOLFSSL_WC_DILITHIUM
-// #define WOLFSSL_DILITHIUM_FIPS204_DRAFT
+    // #define WOLFSSL_DILITHIUM_FIPS204_DRAFT
 
+    // #define WOLFSSL_HAVE_LMS
+    // #define WOLFSSL_WC_LMS
+    // #define WOLFSSL_LMS_VERIFY_ONLY
 
-// #define WOLFSSL_HAVE_LMS
-// #define WOLFSSL_WC_LMS
-// #define WOLFSSL_LMS_VERIFY_ONLY
-
-// #define WOLFSSL_HAVE_XMSS
-// #define WOLFSSL_WC_XMSS
+    // #define WOLFSSL_HAVE_XMSS
+    // #define WOLFSSL_WC_XMSS
 
 #define WC_DILITHIUM_CACHE_MATRIX_A
 #define WC_DILITHIUM_CACHE_PRIV_VECTORS
@@ -115,7 +118,6 @@ extern "C" {
 
 #endif
 
-
 #define NO_MD4
 #define NO_MD5
 #define NO_DES3
@@ -125,14 +127,12 @@ extern "C" {
 #define NO_AES_192
 #define WOLFSSL_NO_SPHINCS
 
-
 /* Debugging */
 #define DEBUG_WOLFSSL
 #define WOLFSSL_MAX_ERROR_SZ 224
 // #define WOLFSSL_DEBUG_PKCS11
 // #define WOLFSSL_DEBUG_MEMORY
 // #define WOLFSSL_DEBUG_MEMORY_PRINT
-
 
 /* Math configuration */
 #define WOLFSSL_SP_MATH
