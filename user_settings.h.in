@@ -2,7 +2,8 @@
 #define _USER_SETTINGS_H_
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 /* Feature support */
@@ -61,6 +62,12 @@ extern "C" {
 #define HAVE_ECC
 #define HAVE_ECC384
 #define HAVE_ECC521
+// pkcs 7 support
+#define HAVE_PKCS7
+#define HAVE_X963_KDF
+#define HAVE_AES_KEYWRAP
+#define WOLFSSL_AES_DIRECT
+// end pkcs 7 support
 #define ECC_SHAMIR
 #define ECC_TIMING_RESISTANT
 #define WOLFSSL_PUBLIC_MP
@@ -92,12 +99,12 @@ extern "C" {
 #define HAVE_DILITHIUM
 #define WOLFSSL_WC_DILITHIUM
 
-// #define WOLFSSL_HAVE_LMS
-// #define WOLFSSL_WC_LMS
-// #define WOLFSSL_LMS_VERIFY_ONLY
+    // #define WOLFSSL_HAVE_LMS
+    // #define WOLFSSL_WC_LMS
+    // #define WOLFSSL_LMS_VERIFY_ONLY
 
-// #define WOLFSSL_HAVE_XMSS
-// #define WOLFSSL_WC_XMSS
+    // #define WOLFSSL_HAVE_XMSS
+    // #define WOLFSSL_WC_XMSS
 
 // #define WC_DILITHIUM_CACHE_MATRIX_A
 // #define WC_DILITHIUM_CACHE_PRIV_VECTORS
@@ -128,6 +135,7 @@ extern "C" {
 // #define WOLFSSL_DEBUG_MEMORY
 // #define WOLFSSL_DEBUG_MEMORY_PRINT
 
+
 #cmakedefine KRITIS3M_WOLFSSL_HEAP_TRACKING
 
 #if defined(KRITIS3M_WOLFSSL_HEAP_TRACKING)
@@ -137,6 +145,7 @@ extern "C" {
 #define WOLFSSL_TRACK_MEMORY_VERBOSE
 
 #endif
+
 
 /* Math configuration */
 #define WOLFSSL_SP_MATH
