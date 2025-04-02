@@ -33,10 +33,12 @@ extern "C"
 #define WC_ENABLE_ASYM_KEY_EXPORT
 #define KEEP_PEER_CERT
 
-#define WOLFSSL_PSK_ONE_ID
 #define NO_TLSX_PSKKEM_PLAIN_ANNOUNCE
-#define MAX_PSK_ID_LEN 127 /* One byte is added internally */
+#define MAX_PSK_ID_LEN 63 /* One byte is added internally */
+#define MAX_PSK_CTX_LEN 64
 #define WOLFSSL_CERT_WITH_EXTERN_PSK
+#define WOLFSSL_EXTERNAL_PSK_IMPORTER
+#define WOLFSSL_EXTERNAL_PSK_IMPORTER_ADD_ENTROPY
 
 #define NO_PWDBASED
 #define NO_WRITEV
@@ -68,6 +70,7 @@ extern "C"
 // end pkcs 7 support
 #define ECC_SHAMIR
 #define ECC_TIMING_RESISTANT
+#define WOLFSSL_PUBLIC_MP
 #define HAVE_CURVE25519
 #define HAVE_ED25519
 #define HAVE_ED25519_KEY_EXPORT
@@ -90,13 +93,11 @@ extern "C"
 #define HAVE_POLY1305
 #define HAVE_ONE_TIME_AUTH
 #define GCM_TABLE_4BIT
-#define WOLFSSL_HAVE_KYBER
-#define WOLFSSL_WC_KYBER
-// #define WOLFSSL_KYBER_ORIGINAL
+#define WOLFSSL_HAVE_MLKEM
+#define WOLFSSL_WC_MLKEM
 #define WOLFSSL_MLKEM_CACHE_A
 #define HAVE_DILITHIUM
 #define WOLFSSL_WC_DILITHIUM
-    // #define WOLFSSL_DILITHIUM_FIPS204_DRAFT
 
     // #define WOLFSSL_HAVE_LMS
     // #define WOLFSSL_WC_LMS
@@ -105,9 +106,9 @@ extern "C"
     // #define WOLFSSL_HAVE_XMSS
     // #define WOLFSSL_WC_XMSS
 
-#define WC_DILITHIUM_CACHE_MATRIX_A
-#define WC_DILITHIUM_CACHE_PRIV_VECTORS
-#define WC_DILITHIUM_CACHE_PUB_VECTORS
+// #define WC_DILITHIUM_CACHE_MATRIX_A
+// #define WC_DILITHIUM_CACHE_PRIV_VECTORS
+// #define WC_DILITHIUM_CACHE_PUB_VECTORS
 
 /* Liboqs FALCON support */
 #cmakedefine KRITIS3M_WOLFSSL_ENABLE_FALCON
@@ -133,6 +134,18 @@ extern "C"
 // #define WOLFSSL_DEBUG_PKCS11
 // #define WOLFSSL_DEBUG_MEMORY
 // #define WOLFSSL_DEBUG_MEMORY_PRINT
+
+
+#cmakedefine KRITIS3M_WOLFSSL_HEAP_TRACKING
+
+#if defined(KRITIS3M_WOLFSSL_HEAP_TRACKING)
+
+#define USE_WOLFSSL_MEMORY
+#define WOLFSSL_TRACK_MEMORY
+#define WOLFSSL_TRACK_MEMORY_VERBOSE
+
+#endif
+
 
 /* Math configuration */
 #define WOLFSSL_SP_MATH

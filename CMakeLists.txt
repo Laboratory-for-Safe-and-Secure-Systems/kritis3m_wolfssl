@@ -37,6 +37,9 @@ option(KRITIS3M_WOLFSSL_AARCH64_CRYPTO_EXT "Use ARM Aarch64 cryptographic extens
 # enabled via the additional library liboqs. When disabled, the library will not be built.
 option(KRITIS3M_WOLFSSL_ENABLE_FALCON "Enable FALCON (FN-DSA) signature algorithm" ON)
 
+# When enabled, heap memory tracking is enabled in WolfSSL.
+option(KRITIS3M_WOLFSSL_HEAP_TRACKING "Enable heap memory tracking" OFF)
+
 
 # Make sure all libraries are installed in the lib directory (not lib64)
 set(CMAKE_INSTALL_LIBDIR "lib")
@@ -85,6 +88,7 @@ if(KRITIS3M_WOLFSSL_ENABLE_FALCON)
         set(OQS_ENABLE_SIG_DILITHIUM OFF)
         set(OQS_ENABLE_SIG_MAYO OFF)
         set(OQS_ENABLE_SIG_CROSS OFF)
+        set(OQS_ENABLE_SIG_UOV OFF)
         set(OQS_ENABLE_SIG_ML_DSA OFF)
         set(OQS_ENABLE_SIG_STFL_XMSS OFF)
         set(OQS_ENABLE_SIG_STFL_LMS OFF)
