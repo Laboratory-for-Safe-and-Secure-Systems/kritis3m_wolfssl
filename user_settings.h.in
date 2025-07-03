@@ -52,6 +52,7 @@ extern "C" {
 #define NO_SESSION_CACHE
 #define NO_CLIENT_CACHE
 #define WOLFSSL_NO_ASYNC_IO
+#define WC_NO_DEFAULT_DEVID
 // #define NO_PKCS11_ECDH
 // #define NO_PKCS11_EC_KEYGEN
 
