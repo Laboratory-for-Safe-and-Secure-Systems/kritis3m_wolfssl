@@ -96,6 +96,8 @@ if(KRITIS3M_WOLFSSL_ENABLE_FALCON)
         set(OQS_ENABLE_SIG_ML_DSA OFF)
         set(OQS_ENABLE_SIG_STFL_XMSS OFF)
         set(OQS_ENABLE_SIG_STFL_LMS OFF)
+        set(OQS_ENABLE_KEM_NTRUPRIME OFF)
+        set(OQS_ENABLE_KEM_NTRU OFF)
 
         # Actually add the external repositories to our project
         FetchContent_GetProperties(liboqs)
