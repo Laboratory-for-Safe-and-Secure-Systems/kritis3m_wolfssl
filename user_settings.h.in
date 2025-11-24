@@ -14,7 +14,6 @@ extern "C" {
 #define HAVE_NULL_CIPHER
 #define HAVE_SECRET_CALLBACK
 #define HAVE_WOLF_BIGINT
-#define WOLFSSL_DUAL_ALG_CERTS
 #define WOLFSSL_ASN_TEMPLATE
 #define WOLFSSL_PUBLIC_ASN
 #define LARGE_STATIC_BUFFERS
@@ -36,7 +35,15 @@ extern "C" {
 #define WOLFSSL_EXTERNAL_PSK_IMPORTER
 #define WOLFSSL_EXTERNAL_PSK_IMPORTER_ADD_ENTROPY
 
-#define HAVE_SNI
+// #define HAVE_SNI
+
+#cmakedefine KRITIS3M_WOLFSSL_DUAL_ALG_CERTS
+
+#if defined(KRITIS3M_WOLFSSL_DUAL_ALG_CERTS)
+
+#define WOLFSSL_DUAL_ALG_CERTS
+
+#endif
 
 #define NO_PWDBASED
 #define NO_WRITEV
@@ -55,10 +62,10 @@ extern "C" {
 // #define HAVE_PKCS11_STATIC
 // #define HAVE_PKCS11_STATIC_V3
 #define HAVE_OID_ENCODING
-// #define NO_PKCS11_ECDH
-// #define NO_PKCS11_EC_KEYGEN
-// #define NO_PKCS11_RSA
-// #define NO_PKCS11_HMAC
+#define NO_PKCS11_ECDH
+#define NO_PKCS11_EC_KEYGEN
+#define NO_PKCS11_RSA
+#define NO_PKCS11_HMAC
 #define WOLFSSL_PKCS11_EVIDEN_FIX
 
 /* Enable experimental features */

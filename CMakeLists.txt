@@ -40,6 +40,9 @@ option(KRITIS3M_WOLFSSL_ENABLE_FALCON "Enable FALCON (FN-DSA) signature algorith
 # When enabled, heap memory tracking is enabled in WolfSSL.
 option(KRITIS3M_WOLFSSL_HEAP_TRACKING "Enable heap memory tracking" OFF)
 
+# When enabled, the Dual Algorithm Certificate featrue is activated in WolfSSL.
+option(KRITIS3M_WOLFSSL_DUAL_ALG_CERTS "Enable Dual Algorithm Certificates" ON)
+
 
 # Make sure all libraries are installed in the lib directory (not lib64)
 set(CMAKE_INSTALL_LIBDIR "lib")
