@@ -168,6 +168,10 @@ target_compile_options(wolfssl PRIVATE
 )
 if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "aarch64|arm64")
         target_compile_options(wolfssl PRIVATE -mstrict-align)
+
+        if(KRITIS3M_WOLFSSL_AARCH64_CRYPTO_EXT)
+                target_compile_options(wolfssl PRIVATE -march=armv8-a+crypto)
+        endif()
 endif()
 
 
