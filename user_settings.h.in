@@ -145,8 +145,8 @@ extern "C" {
 
 #if defined(KRITIS3M_WOLFSSL_CONSTANT_PRNG)
 
-#define WOLFSSL_GENSEED_FORTEST
-#define USE_TEST_GENSEED
+extern int rand_gen_seed(unsigned char *output, int sz);
+#define CUSTOM_RAND_GENERATE_SEED rand_gen_seed
 
 #endif
 
