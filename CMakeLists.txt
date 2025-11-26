@@ -139,6 +139,8 @@ elseif("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "aarch64|arm64" AND KRITIS3M_WOLFSSL_
         set(WOLFSSL_ARM_ASM ON)
 endif()
 
+# Write the configuration into the user_settings.h file
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/user_settings.h.in user_settings.h)
 
 FetchContent_GetProperties(wolfssl)
 if(NOT wolfssl_POPULATED)
@@ -150,8 +152,6 @@ if(NOT wolfssl_POPULATED)
         endif()
 endif()
 
-# Write the configuration into the user_settings.h file
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/user_settings.h.in user_settings.h)
 
 # In order for WolfSSL to find the 'user_settings.h' file, we have to
 # provide the directory where it is located.
@@ -183,7 +183,6 @@ endif()
 if(KRITIS3M_WOLFSSL_CONSTANT_PRNG)
         target_compile_options(wolfssl PRIVATE -Wno-error=cpp)
 endif()
-
 
 
 # Install our user_settings.h file
