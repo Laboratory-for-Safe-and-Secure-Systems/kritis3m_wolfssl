@@ -140,6 +140,16 @@ extern "C" {
 #define NO_AES_192
 #define WOLFSSL_NO_SPHINCS
 
+/* Constant PRNG for testing */
+#cmakedefine KRITIS3M_WOLFSSL_CONSTANT_PRNG
+
+#if defined(KRITIS3M_WOLFSSL_CONSTANT_PRNG)
+
+#define WOLFSSL_GENSEED_FORTEST
+#define USE_TEST_GENSEED
+
+#endif
+
 /* Debugging */
 #define DEBUG_WOLFSSL
 #define WOLFSSL_MAX_ERROR_SZ 224

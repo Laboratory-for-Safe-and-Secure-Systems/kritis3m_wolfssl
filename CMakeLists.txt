@@ -43,6 +43,10 @@ option(KRITIS3M_WOLFSSL_HEAP_TRACKING "Enable heap memory tracking" OFF)
 # When enabled, the Dual Algorithm Certificate featrue is activated in WolfSSL.
 option(KRITIS3M_WOLFSSL_DUAL_ALG_CERTS "Enable Dual Algorithm Certificates" ON)
 
+# When enabled, all WolfSSL pseudo-random number generators (PRNGs) are seeded with
+# a constant value for testing purposes (so all test runs have the same random output).
+option(KRITIS3M_WOLFSSL_CONSTANT_PRNG "Enable constant PRNG seeding for testing" OFF)
+
 
 # Make sure all libraries are installed in the lib directory (not lib64)
 set(CMAKE_INSTALL_LIBDIR "lib")
@@ -173,6 +177,11 @@ if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "aarch64|arm64")
                 target_compile_options(wolfssl PRIVATE -march=armv8-a+crypto)
         endif()
 endif()
+
+if(KRITIS3M_WOLFSSL_CONSTANT_PRNG)
+        target_compile_options(wolfssl PRIVATE -Wno-error=cpp)
+endif()
+
 
 
 # Install our user_settings.h file
