@@ -137,6 +137,7 @@ if("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "x86_64|AMD64" AND KRITIS3M_WOLFSSL_ASM)
 elseif("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "aarch64|arm64" AND KRITIS3M_WOLFSSL_ASM)
         message(STATUS "Enabling ARM ASM optimizations for WolfSSL")
         set(WOLFSSL_ARM_ASM ON)
+        set(WOLFSSL_ARMASM_INLINE ON)
 endif()
 
 # Write the configuration into the user_settings.h file

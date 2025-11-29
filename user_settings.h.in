@@ -193,6 +193,7 @@ extern int rand_gen_seed(unsigned char *output, int sz);
 
 #define WOLFSSL_SP_ASM
 #define WOLFSSL_ARMASM
+#define WOLFSSL_ARMASM_INLINE
 #define WOLFSSL_SP_ARM64
 #define WOLFSSL_SP_ARM64_ASM
 #define WOLFSSL_AARCH64_NO_SQRDMLSH
