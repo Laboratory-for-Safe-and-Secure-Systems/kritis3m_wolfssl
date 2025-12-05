@@ -47,6 +47,11 @@ option(KRITIS3M_WOLFSSL_DUAL_ALG_CERTS "Enable Dual Algorithm Certificates" ON)
 # a constant value for testing purposes (so all test runs have the same random output).
 option(KRITIS3M_WOLFSSL_CONSTANT_PRNG "Enable constant PRNG seeding for testing" OFF)
 
+# When enabled, all authentication related functionality during the TLS handshake can be fully
+# offloaded to an external PKCS#11 module. Otherwise, only private key operations are offloaded.
+# In this case, however, PKI functionality as well as PSKs via PKCS#11 are not supported.
+option(KRITIS3M_WOLFSSL_FULL_PKCS11_OFFLOAD "Enable full PKCS#11 auth offloading" OFF)
+
 
 # Make sure all libraries are installed in the lib directory (not lib64)
 set(CMAKE_INSTALL_LIBDIR "lib")
